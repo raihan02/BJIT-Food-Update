@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 class staffViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
    
-    
+   
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var staffName: UILabel!
     @IBOutlet weak var staffTableView: UITableView!
@@ -19,19 +19,24 @@ class staffViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let realm = try! Realm()
     var itemList : Results <menuItem>?
     var staffItemList : Results<staffItem>?
+    var amountList : Results<amountInfo>?
+    
     var item = ""
+    var itemPrice = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         staffTableView.delegate = self
         staffTableView.dataSource = self
         staffName.text = "Hello Mr/Mrs: " + holdStaffName + "-San"
-        print(holdStaffId)
-      // allStaffs()
-        //print(itemList?.count)
+        let object = realm.objects(amountInfo.self)
+        //print(holdStaffId)
+        let q = object.filter("staffId = %@", holdStaffId).first
+        try! realm.write {
+            amountLabel.text = q?.itemPrice
+        }
         dataView()
+        
     }
-    
-    
     
       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return itemList?.count ?? 1
@@ -42,19 +47,21 @@ class staffViewController: UIViewController, UITableViewDelegate, UITableViewDat
            let cell = staffTableView.dequeueReusableCell(withIdentifier: "staffCell", for: indexPath)
             cell.textLabel?.text =  itemList?[indexPath.row].itemName ?? "No name included"
             cell.detailTextLabel?.text = "Price: " + (itemList?[indexPath.row].itemPrice)!
+           //itemPrice = (itemList?[indexPath.row].itemPrice)!
             return cell
        }
       
     func dataView()
     {
         itemList = realm.objects(menuItem.self)
+        amountList = realm.objects(amountInfo.self)
         staffTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let itemObject = itemList?[indexPath.row]
         item = itemObject!.itemName
-        //show()
+        itemPrice = itemObject!.itemPrice
     }
     
     
@@ -71,7 +78,8 @@ class staffViewController: UIViewController, UITableViewDelegate, UITableViewDat
         anObject.staffId = holdStaffId
         anObject.staffName = holdStaffName
         anObject.staffItem = item
-        
+        var flag1 : Bool = false
+    
         do {
             try realm.write {
                 staffItemList = realm.objects(staffItem.self)
@@ -79,7 +87,7 @@ class staffViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 for item in staffItemList!{
                     if item.staffId == anObject.staffId{
                         flag = true
-                       
+                        flag1 = true
                         let nameAlert = UIAlertController(title: "Already Ordered", message: "", preferredStyle: .alert)
                         nameAlert.addAction(UIAlertAction(title: "", style: .cancel, handler: nil))
                         self.present(nameAlert, animated: true, completion: nil)
@@ -92,18 +100,60 @@ class staffViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     nameAlert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: nil))
                     self.present(nameAlert, animated: true, completion: nil)
                 }
+                
+               
             }
         }
         catch{
             print(error)
         }
-        var sum : Double = 0.0
-        for item in itemList!{
-            sum += Double(item.itemPrice) ?? 0.0
+        
+        if flag1 == false{
+            var flag : Bool = false
+            let anAmount = amountInfo()
+            anAmount.staffId = holdStaffId
+            anAmount.staffName = holdStaffName
+            anAmount.itemPrice = itemPrice
+            var price: String = ""
+            for item in amountList!{
+                if anAmount.staffId == item.staffId{
+                    flag = true
+                    price = item.itemPrice
+                    break
+                }
+            }
+            //print("Flag: ", flag)
+            if flag == false{
+                do{
+                    try realm.write {
+                        realm.add(anAmount)
+                        }
+                }
+                catch{
+                    print(error)
+                }
+            }
+            else{
+                var priceInt : Int = 0
+                var presentPrice : Int = 0
+                presentPrice = Int(anAmount.itemPrice) ?? 1
+                priceInt = Int(price) ?? 0
+                priceInt += presentPrice
+                
+                //print(priceInt)
+                var finalString = ""
+                finalString = String(priceInt)
+                amountLabel.text =  finalString
+                let object = realm.objects(amountInfo.self)
+                //print(holdStaffId)
+                let q = object.filter("staffId = %@", holdStaffId).first
+                try! realm.write {
+                    q?.itemPrice = finalString
+                }
+              
+            }
         }
         
-        amountLabel.text = String(sum)
-
     }
     
     func removeData()
@@ -120,5 +170,4 @@ class staffViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     
-
 }

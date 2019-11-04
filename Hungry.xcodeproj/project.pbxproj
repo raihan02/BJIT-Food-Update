@@ -22,6 +22,9 @@
 		FA653C9D2366D20600B27156 /* staffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA653C9C2366D20600B27156 /* staffViewController.swift */; };
 		FA653CA02366DAB300B27156 /* MenuItemClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA653C9F2366DAB300B27156 /* MenuItemClass.swift */; };
 		FA74BD802362ED8E00B30661 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74BD7F2362ED8E00B30661 /* HomePageViewController.swift */; };
+		FA7E0EDF236FCBE1003B1D91 /* AmountClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E0EDE236FCBE1003B1D91 /* AmountClass.swift */; };
+		FA7E0EE1236FF68C003B1D91 /* AmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E0EE0236FF68C003B1D91 /* AmountViewController.swift */; };
+		FA7E0EE323704AA4003B1D91 /* AmountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E0EE223704AA4003B1D91 /* AmountTableViewCell.swift */; };
 		FABD45172361B1ED00A04B52 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABD45162361B1ED00A04B52 /* RegistrationViewController.swift */; };
 		FABD45192361B69100A04B52 /* RegistrationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABD45182361B69100A04B52 /* RegistrationClass.swift */; };
 		FAC5AA7F236AD01D00F70587 /* DateClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC5AA7E236AD01D00F70587 /* DateClass.swift */; };
@@ -47,6 +50,9 @@
 		FA653C9C2366D20600B27156 /* staffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = staffViewController.swift; sourceTree = "<group>"; };
 		FA653C9F2366DAB300B27156 /* MenuItemClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemClass.swift; sourceTree = "<group>"; };
 		FA74BD7F2362ED8E00B30661 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		FA7E0EDE236FCBE1003B1D91 /* AmountClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountClass.swift; sourceTree = "<group>"; };
+		FA7E0EE0236FF68C003B1D91 /* AmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountViewController.swift; sourceTree = "<group>"; };
+		FA7E0EE223704AA4003B1D91 /* AmountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountTableViewCell.swift; sourceTree = "<group>"; };
 		FABD45162361B1ED00A04B52 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		FABD45182361B69100A04B52 /* RegistrationClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationClass.swift; sourceTree = "<group>"; };
 		FAC5AA7E236AD01D00F70587 /* DateClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateClass.swift; sourceTree = "<group>"; };
@@ -120,6 +126,9 @@
 				FA2F10FF23694AC60075DECB /* AddSection.swift */,
 				FA2F1103236984F70075DECB /* CellTableViewCell.swift */,
 				FAC5AA7E236AD01D00F70587 /* DateClass.swift */,
+				FA7E0EDE236FCBE1003B1D91 /* AmountClass.swift */,
+				FA7E0EE0236FF68C003B1D91 /* AmountViewController.swift */,
+				FA7E0EE223704AA4003B1D91 /* AmountTableViewCell.swift */,
 			);
 			path = Hungry;
 			sourceTree = "<group>";
@@ -242,10 +251,13 @@
 				FABD45192361B69100A04B52 /* RegistrationClass.swift in Sources */,
 				FA3C25162361AE61001AC358 /* ViewController.swift in Sources */,
 				FA74BD802362ED8E00B30661 /* HomePageViewController.swift in Sources */,
+				FA7E0EE323704AA4003B1D91 /* AmountTableViewCell.swift in Sources */,
 				FA6158DE236859A300AAF9FD /* StaffItemList.swift in Sources */,
 				FA3C25122361AE61001AC358 /* AppDelegate.swift in Sources */,
+				FA7E0EDF236FCBE1003B1D91 /* AmountClass.swift in Sources */,
 				FA2F110023694AC60075DECB /* AddSection.swift in Sources */,
 				FA6158E023685D4700AAF9FD /* ListViewController.swift in Sources */,
+				FA7E0EE1236FF68C003B1D91 /* AmountViewController.swift in Sources */,
 				FA653C9B2366D1B000B27156 /* AdminViewController.swift in Sources */,
 				FA2F1104236984F70075DECB /* CellTableViewCell.swift in Sources */,
 				FA653CA02366DAB300B27156 /* MenuItemClass.swift in Sources */,

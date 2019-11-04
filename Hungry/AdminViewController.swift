@@ -26,10 +26,10 @@ class AdminViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let aDate = dateClass()
    // var flag : Bool
     override func viewDidLoad() {
-        super.viewDidLoad()
-
-        print(Realm.Configuration.defaultConfiguration.fileURL)
         
+        super.viewDidLoad()
+        
+        print(Realm.Configuration.defaultConfiguration.fileURL)
         let today = Date()
         let month = Calendar.current.component(.month, from: today)
         menuListTableView.delegate = self
@@ -49,6 +49,7 @@ class AdminViewController: UIViewController, UITableViewDelegate, UITableViewDat
              }
         
         dataView()
+        //removeData()
         
     }
     @IBAction func logOutButton(_ sender: UIButton) {
@@ -163,9 +164,11 @@ class AdminViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let allNotifications = realm.objects(dateClass.self)
             let menu = realm.objects(menuItem.self)
             let orderList = realm.objects(staffItem.self)
+           //let amount = realm.objects(amountInfo.self)
             realm.delete(menu)
             realm.delete(allNotifications)
             realm.delete(orderList)
+            //realm.delete(amount)
          }
         }
         catch{

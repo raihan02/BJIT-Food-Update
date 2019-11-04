@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var logInIdText: UITextField!
     @IBOutlet weak var loginPasswordText: UITextField!
     var userArray : Results <RegistrationInfo>?
+   // var itemList : Results <amountInfo>?
     let realm = try! Realm()
     override func viewDidLoad() {
         super.viewDidLoad()
