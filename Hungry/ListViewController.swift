@@ -55,6 +55,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.nameLabel.text = itemList?[indexPath.row].staffName
         cell.idLabel.text = itemList?[indexPath.row].staffId
         cell.itemLabel.text = itemList?[indexPath.row].staffItem
+        cell.backgroundColor = UIColor.yellow
         return cell
     }
     

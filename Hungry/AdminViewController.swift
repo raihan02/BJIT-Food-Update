@@ -67,11 +67,8 @@ class AdminViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let nameAlert = UIAlertController(title: "Item name already exist",message: "", preferredStyle: .alert)
                 nameAlert.addAction(UIAlertAction(title: "Error", style: .cancel, handler: nil))
                    self.present(nameAlert, animated: true, completion: nil)
-                
                 return
-                
             }
-            
         }
         anItem.itemName = Item
         anItem.itemPrice = Price
@@ -86,7 +83,6 @@ class AdminViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         menuListTableView.reloadData()
     }
-    
     @IBAction func deleteItamButton(_ sender: UIButton) {
         
     }
@@ -100,6 +96,7 @@ class AdminViewController: UIViewController, UITableViewDelegate, UITableViewDat
        
         cell.textLabel?.text =  itemList?[indexPath.row].itemName ?? "No name included"
         cell.detailTextLabel?.text = "Price: " + (itemList?[indexPath.row].itemPrice)!
+        cell.backgroundColor = UIColor.yellow
         return cell
     
     }
@@ -164,11 +161,13 @@ class AdminViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let allNotifications = realm.objects(dateClass.self)
             let menu = realm.objects(menuItem.self)
             let orderList = realm.objects(staffItem.self)
-           //let amount = realm.objects(amountInfo.self)
+            let amount = realm.objects(amountInfo.self)
+            let reg = realm.objects(RegistrationInfo.self)
             realm.delete(menu)
             realm.delete(allNotifications)
             realm.delete(orderList)
-            //realm.delete(amount)
+            realm.delete(amount)
+            realm.delete(reg)
          }
         }
         catch{

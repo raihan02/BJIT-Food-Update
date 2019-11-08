@@ -10,6 +10,8 @@ import UIKit
 import RealmSwift
 class ViewController: UIViewController {
 
+   
+     
     @IBOutlet weak var logInIdText: UITextField!
     @IBOutlet weak var loginPasswordText: UITextField!
     var userArray : Results <RegistrationInfo>?
@@ -17,10 +19,8 @@ class ViewController: UIViewController {
     let realm = try! Realm()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        loginPasswordText.isSecureTextEntry = true
     }
-    
-    
     @IBAction func logInButton(_ sender: UIButton) {
         userArray = realm.objects(RegistrationInfo.self)
         var flag: Bool = false
@@ -43,6 +43,7 @@ class ViewController: UIViewController {
                     info.holdStaffId = item.userID
                     show(info, sender: self)
                 }
+                isClear()
                 break
             }
 
@@ -52,7 +53,17 @@ class ViewController: UIViewController {
             let nameAlert = UIAlertController(title: "In Valid User ID or Password", message: "Please enter correct id or password", preferredStyle: .alert)
             nameAlert.addAction(UIAlertAction(title: "Error", style: .cancel, handler: nil))
                self.present(nameAlert, animated: true, completion: nil)
+            isClear()
+
         }
+        
+    
+    }
+    
+    func isClear()
+    {
+        loginPasswordText.text = ""
+        logInIdText.text = ""
     }
     
 }

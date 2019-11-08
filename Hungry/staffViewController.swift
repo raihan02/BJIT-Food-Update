@@ -10,7 +10,8 @@ import UIKit
 import RealmSwift
 class staffViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
    
-   
+
+    @IBOutlet weak var todaysFoodItem: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var staffName: UILabel!
     @IBOutlet weak var staffTableView: UITableView!
@@ -23,19 +24,31 @@ class staffViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var item = ""
     var itemPrice = ""
+    var dateDictionary : Dictionary<Int, String> = [1: "Jan", 2 : "Feb" , 3 : "Mar", 4 : "Apr" , 5 : "May", 6 : "June", 7 : "Jul" , 8 : "Aug" , 9 : "Sept" , 10 : "Oct" , 11 : "Nov" , 12 : "Dec"]
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         staffTableView.delegate = self
         staffTableView.dataSource = self
+        let today = Date()
+        let month = Calendar.current.component(.month, from: today)
         staffName.text = "Hello Mr/Mrs: " + holdStaffName + "-San"
         let object = realm.objects(amountInfo.self)
         //print(holdStaffId)
         let q = object.filter("staffId = %@", holdStaffId).first
         try! realm.write {
-            amountLabel.text = q?.itemPrice
+            
+            if let item = q?.itemPrice{
+            
+                    amountLabel.text = "In " + dateDictionary[month]! +  item + " Taka"
+            }
+            else{
+              
+                amountLabel.text = "In " + dateDictionary[month]!  + " 0 Taka"
+            }
         }
         dataView()
-        
+        todaysFoodItem.text = "Todays my Order: " + item 
     }
     
       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,6 +61,7 @@ class staffViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.textLabel?.text =  itemList?[indexPath.row].itemName ?? "No name included"
             cell.detailTextLabel?.text = "Price: " + (itemList?[indexPath.row].itemPrice)!
            //itemPrice = (itemList?[indexPath.row].itemPrice)!
+        cell.backgroundColor = UIColor.yellow
             return cell
        }
       
@@ -62,6 +76,7 @@ class staffViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let itemObject = itemList?[indexPath.row]
         item = itemObject!.itemName
         itemPrice = itemObject!.itemPrice
+        
     }
     
     
@@ -89,7 +104,7 @@ class staffViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         flag = true
                         flag1 = true
                         let nameAlert = UIAlertController(title: "Already Ordered", message: "", preferredStyle: .alert)
-                        nameAlert.addAction(UIAlertAction(title: "", style: .cancel, handler: nil))
+                        nameAlert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: nil))
                         self.present(nameAlert, animated: true, completion: nil)
                         break
                     }
@@ -99,9 +114,9 @@ class staffViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     let nameAlert = UIAlertController(title: "Successfully Ordered", message: "", preferredStyle: .alert)
                     nameAlert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: nil))
                     self.present(nameAlert, animated: true, completion: nil)
+                    //showItem()
                 }
                 
-               
             }
         }
         catch{
@@ -169,5 +184,9 @@ class staffViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    
+    func showItem(){
+        
+        todaysFoodItem.text = "Todays my Order: " + item
+        //checkFood = false
+    }
 }

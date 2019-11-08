@@ -30,6 +30,7 @@ class AmountViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.name.text = itemList?[indexPath.row].staffName
         cell.id.text = itemList?[indexPath.row].staffId
         cell.price.text = itemList?[indexPath.row].itemPrice
+        cell.backgroundColor = UIColor.yellow
         return cell
         
     }

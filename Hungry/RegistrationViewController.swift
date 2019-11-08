@@ -24,7 +24,8 @@ class RegistrationViewController: UIViewController,UIPickerViewDelegate, UIPicke
     override func viewDidLoad() {
         super.viewDidLoad()
         print(Realm.Configuration.defaultConfiguration.fileURL)
-
+        passwordText.isSecureTextEntry = true
+        confirmPasswordText.isSecureTextEntry = true
     }
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1
@@ -146,6 +147,8 @@ class RegistrationViewController: UIViewController,UIPickerViewDelegate, UIPicke
         catch{
             print(error)
         }
+        
+      
         
     }
 }
